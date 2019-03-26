@@ -137,7 +137,7 @@ options = SimpleNamespace(
 
     ##
     # Filter disambiguation pages
-    filter_disambig_pages = False,
+    filter_disambig_pages = True,
     
     ##
     # Drop tables from the article
@@ -149,7 +149,7 @@ options = SimpleNamespace(
 
     ##
     # Whether to preserve section titles
-    keepSections = True,
+    keepSections = False,
 
     ##
     # Whether to preserve lists
@@ -196,7 +196,7 @@ options = SimpleNamespace(
         'form', 'input', 'select', 'option', 'textarea',
         'ul', 'li', 'ol', 'dl', 'dt', 'dd', 'menu', 'dir',
         'ref', 'references', 'img', 'imagemap', 'source', 'small',
-        'sub', 'sup', 'indicator'
+        'sub', 'sup', 'indicator', 'score', 'mapframe'
     ],
 )
 
@@ -261,7 +261,7 @@ def get_url(uid):
 
 # ------------------------------------------------------------------------------
 
-selfClosingTags = ('br', 'hr', 'nobr', 'ref', 'references', 'nowiki')
+selfClosingTags = ('BR', 'br', 'hr', 'nobr', 'ref', 'references', 'nowiki')
 
 placeholder_tags = {'math': 'formula', 'code': 'codice'}
 
@@ -3178,6 +3178,7 @@ def main():
             'p', 'plaintext', 's', 'span', 'strike', 'strong',
             'tt', 'u', 'var'
         ]
+    print("ignored tags = ", ignoredTags)
 
     # 'a' tag is handled separately
     for tag in ignoredTags:
@@ -3185,6 +3186,7 @@ def main():
 
     if args.discard_elements:
         options.discardElements = set(args.discard_elements.split(','))
+    print("discard elements = ", options.discardElements)
 
     FORMAT = '%(levelname)s: %(message)s'
     logging.basicConfig(format=FORMAT)
